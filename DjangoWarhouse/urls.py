@@ -4,5 +4,6 @@ from Login.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("login/", include("Login.urls"))
+    path("login/", include("Login.urls")),
+    path("MainPanel/", include("Panel.urls"))
 ]
