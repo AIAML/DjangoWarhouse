@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="limiter">
+
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-pic js-tilt" data-tilt>
+                    {% if state == "failed" %}
+                        <div class="btn alert alert-danger" role="alert">
+                            لطفاً ورودی های خود را کنترل نمایید
+                        </div>
+                    {% endif %}
+                    <img src="{% static 'img/login.png' %}  " alt="IMG">
+                </div>
+                <form method="post"> {% csrf_token %}
+                <span class="login100-form-title" style="font-family: IRANSansWeb">{{ context.orgname }}</span> <!-- Form Title -->
+                <div class="wrap-input100 validate-input" data-validate="لطفاً نام کاربری را وارد کنید">
+                    <input class="input100" id="username" type="text" name="username" value="" placeholder="نام کاربری">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="لطفاً رمز را وارد کنید">
+                        <input id="password" type="password" name="password" value="" class="input100" placeholder="رمز عبور">
+
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <input type="submit" class="login100-form-btn" value="ورود" >
+                    </div>
+            </form>
+        </div>
+        </div>
+    </div>
+{% endblock %}
