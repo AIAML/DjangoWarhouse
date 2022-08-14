@@ -41,28 +41,21 @@ def index(request):
                 cursor.execute(storedProc, params)
                 # Iterate the cursor
                 row = cursor.fetchone()
-
+                response = redirect('/')
                 if len(row) > 0:
                     while row:
-                        response = redirect('/MainPanel/')
+                        if row[4] == 1:
+                            response = redirect('/Panel/PanelAdmin/')
+                        else:
+                            response = redirect('/Panel/PanelUser/')
                         Infrastructure.ManageCookie.Coookie.set_cookie(response, 'username', row[1])
+                        Infrastructure.ManageCookie.Coookie.set_cookie(response, 'building_id', row[3])
+                        Infrastructure.ManageCookie.Coookie.set_cookie(response, 'type_user', row[4])
+
                         cursor.close()
-                        print(Infrastructure.ManageCookie.Coookie.getcookie(request,'username'))
                         return response
                         # Close the cursor and delete it
 
         return render(request, template_name, {'context': context})
     except Exception as ex:
         return render(request, template_name, context)
-
-
-'''def set_cookie(response, key, value, days_expire=7):
-    if days_expire is None:
-        max_age = 365 * 24 * 60 * 60  # one year
-    else:
-        max_age = days_expire * 24 * 60 * 60
-    expires = datetime.datetime.strftime(
-        datetime.datetime.utcnow() + datetime.timedelta(seconds=max_age),
-        "%a, %d-%b-%Y %H:%M:%S GMT",
-    )
-'''
