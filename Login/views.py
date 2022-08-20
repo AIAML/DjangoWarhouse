@@ -26,6 +26,7 @@ def index(request):
             row = cursor.fetchone()
             while row:
                 # Print the row
+
                 if row[0] == 1:
                     context['appname'] = row[2]
                 elif row[0] == 2:
