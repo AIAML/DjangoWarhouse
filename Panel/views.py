@@ -20,10 +20,10 @@ def AdminPanelindex(request):
         if Infrastructure.ManageCookie.Coookie.check_session_cookie(request,"username") == 1:
             return render(request, template_name, context)
         else:
-
             print(Infrastructure.ManageCookie.Coookie.get_cookie(request,"username"))
             response.delete_cookie('username')
             return response
+
     except Exception as ex:
         return response
 
